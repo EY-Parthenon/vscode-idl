@@ -44,7 +44,7 @@ export class IDLTreeClickHandler {
     );
   }
 
-  private _getActivePROCode(): vscode.TextDocument {
+  private _getActivePROCode(): vscode.TextDocument | null {
     const editor = vscode.window.activeTextEditor;
     if (!editor) {
       return null;

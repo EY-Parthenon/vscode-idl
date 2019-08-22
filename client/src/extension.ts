@@ -80,11 +80,11 @@ export function activate(ctx: ExtensionContext) {
         kids => {
           treeView.reveal(kids[0], { select: true });
         },
-        rejected => {
+        (rejected: any) => {
           console.log(rejected);
         }
       )
-      .then(undefined, rejected => {
+      .then(undefined, (rejected: any) => {
         console.log(rejected);
       });
   });
