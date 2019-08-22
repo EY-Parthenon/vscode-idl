@@ -51,8 +51,15 @@ function activate(ctx) {
         // handle our click event
         clickHandler.clickedItem(event.selection[0]);
         // treeView.reveal(event.selection[0], { select: false, focus: false });
-        idlTreeProvider.getChildren().then(kids => {
+        idlTreeProvider
+            .getChildren()
+            .then(kids => {
             treeView.reveal(kids[0], { select: true });
+        }, rejected => {
+            console.log(rejected);
+        })
+            .then(undefined, rejected => {
+            console.log(rejected);
         });
     });
     // Start the client. This will also launch the server

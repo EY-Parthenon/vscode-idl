@@ -4,7 +4,7 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as path from "path";
-import { workspace, ExtensionContext, languages, DocumentFilter } from "vscode";
+import { workspace, ExtensionContext, DocumentFilter } from "vscode";
 import * as vscode from "vscode";
 
 import {
@@ -74,9 +74,19 @@ export function activate(ctx: ExtensionContext) {
     clickHandler.clickedItem(event.selection[0]);
     // treeView.reveal(event.selection[0], { select: false, focus: false });
 
-    idlTreeProvider.getChildren().then(kids => {
-      treeView.reveal(kids[0], { select: true });
-    });
+    idlTreeProvider
+      .getChildren()
+      .then(
+        kids => {
+          treeView.reveal(kids[0], { select: true });
+        },
+        rejected => {
+          console.log(rejected);
+        }
+      )
+      .then(undefined, rejected => {
+        console.log(rejected);
+      });
   });
 
   // Start the client. This will also launch the server

@@ -204,17 +204,26 @@ export class IDLTreeClickHandler {
   terminal = {};
 
   registerTerminalForCapture(terminal: vscode.Terminal) {
-    terminal.processId.then(terminalId => {
-      // (<any>terminal).onDidWriteData((data: string) => {
-      //   terminal[terminalId] += data;
-      //   console.log(data.endsWith("\u000d"));
-      //   // console.log(terminal[terminalId]);
-      // });
-      (<any>terminal).onDidWriteData((data: string) => {
-        // terminal[terminalId] += data;
-        // console.log(data);
-        // console.log(terminal[terminalId]);
+    terminal.processId
+      .then(
+        terminalId => {
+          // (<any>terminal).onDidWriteData((data: string) => {
+          //   terminal[terminalId] += data;
+          //   console.log(data.endsWith("\u000d"));
+          //   // console.log(terminal[terminalId]);
+          // });
+          (<any>terminal).onDidWriteData((data: string) => {
+            // terminal[terminalId] += data;
+            // console.log(data);
+            // console.log(terminal[terminalId]);
+          });
+        },
+        rejected => {
+          console.log(rejected);
+        }
+      )
+      .then(undefined, rejected => {
+        console.log(rejected);
       });
-    });
   }
 }

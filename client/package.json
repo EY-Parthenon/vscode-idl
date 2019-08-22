@@ -20,8 +20,8 @@
 		"webpack-deploy": "npm run clean && webpack"
 	},
 	"dependencies": {
-		"vscode-languageclient": "^4.1.4",
-		"rimraf": "^2.6.2"
+		"rimraf": "^2.6.2",
+		"vscode-languageclient": "^4.1.4"
 	},
 	"devDependencies": {
 		"vscode": "^1.1.30"

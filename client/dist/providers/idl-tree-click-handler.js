@@ -199,7 +199,8 @@ class IDLTreeClickHandler {
         }
     }
     registerTerminalForCapture(terminal) {
-        terminal.processId.then(terminalId => {
+        terminal.processId
+            .then(terminalId => {
             // (<any>terminal).onDidWriteData((data: string) => {
             //   terminal[terminalId] += data;
             //   console.log(data.endsWith("\u000d"));
@@ -210,6 +211,11 @@ class IDLTreeClickHandler {
                 // console.log(data);
                 // console.log(terminal[terminalId]);
             });
+        }, rejected => {
+            console.log(rejected);
+        })
+            .then(undefined, rejected => {
+            console.log(rejected);
         });
     }
 }

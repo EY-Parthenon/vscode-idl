@@ -63,7 +63,9 @@ connection.onInitialized(() => __awaiter(this, void 0, void 0, function* () {
     // TODO: detect when workspace is closed and remove files
     if (hasWorkspaceFolderCapability) {
         // get the list of current workspaces
-        connection.workspace.getWorkspaceFolders().then(folders => {
+        connection.workspace
+            .getWorkspaceFolders()
+            .then(folders => {
             // refresh our index and detect problems on success
             symbolProvider
                 .indexWorkspaces(folders)
@@ -74,6 +76,11 @@ connection.onInitialized(() => __awaiter(this, void 0, void 0, function* () {
                 .catch(err => {
                 connection.console.log(JSON.stringify(err));
             });
+        }, rejected => {
+            connection.console.log(JSON.stringify(rejected));
+        })
+            .then(undefined, rejected => {
+            connection.console.log(JSON.stringify(rejected));
         });
         connection.workspace.connection.workspace // listen for new workspaces
             .onDidChangeWorkspaceFolders((_event) => __awaiter(this, void 0, void 0, function* () {
