@@ -78,7 +78,12 @@ export function activate(ctx: ExtensionContext) {
       .getChildren()
       .then(
         kids => {
-          treeView.reveal(kids[0], { select: true });
+          treeView
+            .reveal(kids[0], { select: true })
+            .then(undefined, rejectReveal => console.log(rejectReveal))
+            .then(undefined, rejectReveal => {
+              console.log(rejectReveal);
+            });
         },
         (rejected: any) => {
           console.log(rejected);
